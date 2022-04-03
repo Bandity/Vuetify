@@ -5,7 +5,7 @@ import AuthService from "./auth.service";
 async function getVirus() {
   let typeReq = 'get'
   let service = '/virus'
-  let serviceName = "GETUSERS";
+  let serviceName = "GETVIRUS";
   console.log('SERVICE: '+serviceName);
   let response = {data: {err: 0, status: 200, data: 'no error'}};
   try {
@@ -23,6 +23,7 @@ async function getVirus() {
   }
   return response.data;
 }
+
 
 export default {
   getVirus,
