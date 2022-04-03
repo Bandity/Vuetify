@@ -4,8 +4,13 @@
       <tr>
         <td>
           <p v-for="(e,index) in entries" :key="index">
-            <input type="checkbox" :id="index" :value="index" v-model="chosenEntries" @change="$emit('chosen-changed',chosenEntries)">
-            <label for="index"><span v-for="(f,index) in fields" :key="index">{{e[f]}} </span></label>
+            <v-checkbox :id="String(index)" :value="index" v-model="chosenEntries" @change="$emit('chosen-changed',chosenEntries)">
+              <template v-slot:label>
+                <span style="padding: 3px" v-for="(f,index) in fields" :key="index">{{e[f]}}</span>
+              </template>
+            </v-checkbox>
+<!--            <input type="checkbox" :id="index" :value="index" v-model="chosenEntries" @change="$emit('chosen-changed',chosenEntries)">
+            <label for="index"><span v-for="(f,index) in fields" :key="index">{{e[f]}} </span></label>-->
           </p>
         </td>
       </tr>

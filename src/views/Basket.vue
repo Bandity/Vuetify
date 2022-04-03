@@ -1,23 +1,34 @@
 <template>
-  <div>
-    <h2>In my basket :</h2>
-    <table >
-      <tr><td>Name</td><td>Code</td><td>% Mortality</td></tr>
-      <tr v-for="(v,index) in basket" :key="index">
-        <td>{{v.name}}</td><td>{{v.code}}</td><td>{{v.mortalite}}</td>
-      </tr>
-    </table>
-    <button @click="sendToLab">Send to the lab</button>
-  </div>
+  <v-card
+      color="grey"
+      class="mt-10 ma-auto"
+      max-width="50%">
+    <v-card-title primary-title class="justify-center">In my basket :</v-card-title>
+    <v-data-table
+        dense
+        :headers="headers"
+        :items="basket"
+        item-key="name"
+        class="grey darken-2 elevation-5"
+    />
+    <v-btn @click="sendToLab">Send to the lab</v-btn>
+  </v-card>
 </template>
 
 <script>
 
-  import {Virus} from "../model";
   import {mapState, mapMutations} from 'vuex'
 
   export default {
     name: 'Basket',
+    data : () => {
+      return {
+        headers: [
+          {width: '100px', text: 'Name', value: 'name'},
+          { width: '100px',text: 'Code', value: 'code' },
+          { width: '100px',text: '% Mortality', value: 'mortalite'}],
+      }
+    },
     computed:{
       ...mapState(['basket'])
     },
@@ -28,4 +39,5 @@
 </script>
 
 <style scoped>
+
 </style>

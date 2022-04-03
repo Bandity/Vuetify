@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <h1>Library</h1>
+  <v-img :src="LibraryBackground">
+      <v-card-title  class="h2 ma-5 primary-title white--text justify-center">Library</v-card-title>
       <Articles></Articles>
       <router-view name="locDown"></router-view>
-  </div>
+  </v-img>
 </template>
 
 <script>
-
+  import LibraryBackground from '../assets/Library.png'
   import Articles from '../components/Articles.vue'
   export default {
+    data : () => {
+      return {
+        LibraryBackground : LibraryBackground
+      }
+    },
     name: 'Library',
     components: {
       Articles

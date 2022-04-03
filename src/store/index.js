@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VirusService from '../services/virus.service'
 
 Vue.use(Vuex);
 
@@ -95,4 +96,20 @@ export default new Vuex.Store({
   },
 
   modules: {},
+  actions: {
+    async getUsers({ commit, state }) {
+      console.log('get all users');
+      if (state.users.length !== 0) return {err:0, status:200, data:'users already retrieved'};
+      let response = null;
+      try {
+        response = await VirusService.getVirus();
+        if (response.err === 0) {
+          commit('updateVirus', response.data);
+        }
+      } catch (err) {
+        console.log("ABNORMAL CASE: ERROR while getting all users");
+        return err.response; // pass the whole object from server (err+data)
+      }
+    },
+  }
 });

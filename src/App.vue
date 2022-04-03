@@ -1,46 +1,60 @@
 <template>
-  <div id="app">
+  <v-app id="app" class="overflow-hidden">
     <NavBar :titles="titles" />
     <keep-alive>
     <router-view name="locCentral"></router-view>
     </keep-alive>
-  </div>
+  </v-app>
 </template>
 
 <script>
   import NavBar from './components/NavBar.vue'
-  import {mapState, mapMutations} from 'vuex'
-
   export default {
     name: 'App',
     data : () => {
       return {
-        titles : [ { text: "Home", color:"black", path:"/home"}, { text: "Lab", color:"blue", path:"/labo/slice"}, { text: "Library", color:"red", path:"/library/view"} ],
+        titles : [ { text: "Home", color:"lightgrey", path:"/home"}, { text: "Lab", color:"lightblue", path:"/labo/slice"}, { text: "Library", color:"lightpink", path:"/library/view"} ],
         currentMenu : 0,
       }
     },
     computed:{
-      ...mapState(['samples', 'parts','basket','viruses'])
     },
     components: {
       NavBar
     },
     methods: {
-      ...mapMutations(['receiveVirus'])
-      /*receiveVirus : function(viruses) {
-        viruses.forEach(v => this.samples.push(v));
-      }*/
     }
   }
 </script>
 
 <style>
+  .v-btn{
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: "Boxy-Bold";
+    src: local("Boxy-Bold"),   url(./assets/Boxy-Bold.ttf) format("truetype");}
+
+  .h1 {
+    font-family: "Boxy-Bold";
+    font-size: 6rem;
+  }
+
+  .h2 {
+    font-family: "Boxy-Bold";
+    font-size: 3.75rem;
+  }
+
+  .maintxt{
+    font-family: "Boxy-Bold";
+    font-size: 2rem;
+  }
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Boxy-Bold";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>

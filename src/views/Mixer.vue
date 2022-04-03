@@ -1,31 +1,42 @@
 <template>
-  <div>
-    <table border="0">
-      <tr>
-        <td><h1>Parts</h1></td>
-      </tr>
-      <tr>
-        <td>
-          <CheckedList
-            :fields="['code']"
-            :entries="parts"
-            @chosen-changed="chosenParts = $event"
-          />
-        </td>
-      </tr>
-    </table>
-    <button :disabled="chosenParts.length == 0" @click="mix(chosenParts)">Mixing</button>
+  <v-card  color="grey"
+           class="mt-10 ma-auto"
+           max-width="70%">
+    <v-card-title primary-title class="justify-center h4">Mixer</v-card-title>
+    <v-simple-table class="grey darken-2">
+      <template v-slot:default>
+        <thead>
+        <tr>
+          <th class="text-center">
+            Parts
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <CheckedList
+              :fields="['code']"
+              :entries="parts"
+              @chosen-changed="chosenParts = $event"
+            />
+          </td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <v-btn :disabled="chosenParts.length == 0" @click="mix(chosenParts)">Mixing</v-btn>
 
     <hr />
-    <button @click="$router.push({ path: '/labo/slice' })">Go to slicer</button>
+    <v-btn @click="$router.push({ path: '/labo/slice' })">Go to slicer</v-btn>
 
     <hr />
     <p v-if="newVirus != null">
-      New virus: <input v-model="newVirus.name" /> {{ newVirus.code }}
+      New Plague: <v-text-field label="Type the name of your new Plague" v-model="newVirus.name" ></v-text-field> {{ newVirus.code }}
       {{ newVirus.mortalite }}
-      <button @click="sendToLibrary">Send to library</button>
+      <v-btn @click="sendToLibrary">Send to library</v-btn>
     </p>
-  </div>
+  </v-card>
 </template>
 
 <script>

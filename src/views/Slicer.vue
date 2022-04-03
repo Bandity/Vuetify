@@ -1,21 +1,31 @@
 <template>
-  <div>
-    <h1>Labo</h1>
-    <table border="0">
-      <tr>
-        <td><h1>Viruses</h1></td>
-      </tr>
-      <tr>
-        <td>
-          <CheckedList :fields="['name','code']" :entries="samples" @chosen-changed="chosenViruses = $event" />
-        </td>
-      </tr>
-    </table>
-    <label for="cut">part length: </label><input id="cut" v-model.number="cutFactor"><button :disabled="chosenViruses.length==0" @click="cut({chosenViruses,cutFactor})">Cut</button>
-    <label for="mute">nb mutations: </label><input id="mute" v-model.number="nbMutation"><button :disabled="chosenViruses.length==0" @click="mutation({chosenViruses,nbMutation})">Mutation</button>
+  <v-card  color="grey"
+           class="mt-10 ma-auto"
+           max-width="70%">
+    <v-card-title primary-title class="justify-center h4">Slicer</v-card-title>
+    <v-simple-table class="grey darken-2">
+      <template v-slot:default>
+        <thead>
+        <tr>
+          <th class="text-center">
+            Plagues
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <CheckedList :fields="['name','code']" :entries="samples" @chosen-changed="chosenViruses = $event" />
+          </td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <label for="cut">part length: </label><input id="cut" v-model.number="cutFactor"><v-btn :disabled="chosenViruses.length==0" @click="cut({chosenViruses,cutFactor})">Cut</v-btn>
+    <label for="mute">nb mutations: </label><input id="mute" v-model.number="nbMutation"><v-btn :disabled="chosenViruses.length==0" @click="mutation({chosenViruses,nbMutation})">Mutation</v-btn>
     <hr/>
-    <button @click="$router.push({path:'/labo/mix'})">Go to mixer</button>
-  </div>
+    <v-btn @click="$router.push({path:'/labo/mix'})">Go to mixer</v-btn>
+  </v-card>
 </template>
 
 <script>
