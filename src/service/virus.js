@@ -24,7 +24,6 @@ async function getVirus() {
   return response.data;
 }
 
-
 export default {
   getVirus,
 }
